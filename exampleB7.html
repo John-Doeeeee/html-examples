@@ -1,0 +1,50 @@
+<!doctype html>
+<!--  ** show metadata **                                         -->
+<!--  The size property is > 0 after an                           -->
+<!--  upload and == 0 after a download.                           -->
+<!--  https://firebase.google.com/docs/storage/web/file-metadata  -->
+<html>
+  <head>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="initJH.js"></script>
+    <script>
+      // Create a reference to the file whose metadata we want to retrieve.
+      var storageRef = firebase.storage().ref('JH/XMLData.xml');
+
+      // Get metadata properties
+      storageRef.getMetadata().then
+      (
+        function(metadata) 
+        {
+          console.log("metadata.bucket: " + metadata.bucket);
+          console.log("metadata.generation: " + metadata.generation);
+          console.log("metadata.metageneration: " + metadata.metageneration);
+          console.log("metadata.fullPath: " + metadata.fullPath);
+          console.log("metadata.name: " + metadata.name);
+          console.log("metadata.size: " + metadata.size);
+          console.log("metadata.timeCreated: " + metadata.timeCreated);
+          console.log("metadata.updated: " + metadata.updated);
+          console.log("metadata.md5Hash: " + metadata.md5Hash);
+          console.log("metadata.crc32c: " + metadata.crc32c);
+          console.log("metadata.etag: " + metadata.etag);
+          console.log("metadata.cacheControl: " + metadata.cacheControl);
+          console.log("metadata.contentDisposition: " + metadata.contentDisposition);
+          console.log("metadata.contentEncoding: " + metadata.contentEncoding);
+          console.log("metadata.contentLanguage: " + metadata.contentLanguage);
+          console.log("metadata.contentType: " + metadata.contentType);
+          console.log("metadata.customMetadata: " + metadata.customMetadata);
+          console.log("metadata.metadata: " + metadata.metadata);
+          console.log("metadata.downloadURLs: " + metadata.downloadURLs);
+        }
+      ).catch
+      (
+        function(error)
+        { 
+          console.log("ERROR: " + error);
+        }
+      );
+    </script>
+  </body>
+</html>

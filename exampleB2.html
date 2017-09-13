@@ -1,0 +1,23 @@
+<!doctype html>
+<!--  ** event handler **                                                   -->
+<!--  This is just the basic file and the event handler of exampleA3.html.  -->
+<html>
+  <head>
+  </head>
+  <body>
+    <input type=file id="input" onchange="myEventHandler();">    <!-- id attribute -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="initJH.js"></script>
+    <script>
+      var fileUpload = document.getElementById("input");       <!-- refers to <input> tag -->
+
+      function myEventHandler()
+      {
+        var fileList = fileUpload.files;                       <!-- fileList is an array -->
+        var firstFile = fileList[0];                           <!-- arrays are zero-based -->
+        console.log("file name = " + firstFile.name);          <!-- log file name to console -->
+      }
+    </script>
+  </body>
+</html>

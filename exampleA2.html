@@ -1,0 +1,18 @@
+<!doctype html>
+<!--  ** an event handler **                                  -->
+<!--  When the user selects a file, a 'change' event occurs.  -->
+<!--  The function 'myEventHandler' handles this event.       -->
+<html>
+  <head>
+  </head>
+  <body>
+    <input type=file onchange="myEventHandler();">    <!-- onchange attribute -->
+
+    <script>
+      function myEventHandler()                       <!-- JavaScript code -->
+      {                                               <!-- logs a message  -->
+        console.log("User seleced a file.");          <!-- to the console  -->
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<!--  ** download a file to the browser page  **                      -->
+<!--  See 'JavaScript: The Definitive Guide' Example 18-2, page 499;  -->
+<!--  and the XMLHttpRequest reference on pages 1012-1017.            -->
+
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="initJH.js"></script>
+  </head>
+  <body>
+    <h1>Firebase Storage</h1>
+
+    <script>
+      // Get a reference to the storage service
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+
+      storageRef.child('JH/hello.js').getDownloadURL().then
+      (
+        function(url)
+        {
+          // This is downloaded directly to the browser page.
+          var xhr = new XMLHttpRequest();
+          xhr.responseType = 'text';   // Legal values are 'text', 'document', 'arraybuffer', 'blob '
+
+          xhr.onload = function(event) // Triggered when the request completes successfully.
+          {
+            var text = xhr.response;   // This is the downoaded text.
+            proceed(text, url);        // Send to the proceed() function for processing.
+          };    
+
+          xhr.open('GET', url);        // Reset the XMLHttpRequest object and store
+                                       // its arguments for later use by the send(). 
+          xhr.send();                  // This method causes an HTTP request to be issued.
+          console.log("url  = " + url);
+        }
+      ).catch
+        (
+          function(error) 
+          {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) 
+            {
+              case 'storage/object_not_found':
+              console.log("ERROR: File doesn't exist");
+              break;
+
+              case 'storage/unauthorized':
+              console.log("EROR: User doesn't have permission to access the object");
+              break;
+
+              case 'storage/canceled':
+              console.log("ERROR: User canceled the upload");
+              break;
+
+              case 'storage/unknown':
+              onsole.log("ERROR: Unknown error occurred, inspect the server response");
+              break;
+            }
+          }
+        ); 
+
+        function proceed(text, url)
+        {
+          console.log(text);
+          console.log(url);
+        }
+
+    </script>
+  </body>
+</html>

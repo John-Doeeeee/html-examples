@@ -1,0 +1,41 @@
+<!doctype html>
+<!--  ** the basic file **  -->
+<html>
+  <head>
+  </head>
+
+  <body>
+
+    <h1>File Reader example</h1>    
+
+    <input type=file id="selectFilesButton" onchange="onFilesSelected();">  
+
+    <script>
+
+
+      function onFilesSelected()
+      {
+        var fileList  = document.getElementById("selectFilesButton").files;    
+        var firstFile = fileList[0]; 
+
+
+        var fileReader = new FileReader();
+
+        fileReader.readAsText(firstFile);
+        
+        fileReader.addEventListener
+        (
+          "loadend", 
+          function(e)
+          {
+              var text = e.srcElement.result; //arraybuffer object
+              console.log(text); // file contents are printed to the console
+          }
+        );        
+
+      }
+
+    </script>
+
+  </body>
+</html>

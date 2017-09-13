@@ -1,0 +1,23 @@
+<!doctype html>
+<!--  ** the files array **                                 -->
+<!--  The <input type=file> element has a 'files' array     -->
+<!--  that is accessed by the DOM method getElementByID().  --> 
+<!--  Use it to display the name of the selected file.      -->
+<html>
+  <head>
+  </head>
+  <body>
+    <input type=file id="input" onchange="myEventHandler();">    <!-- id attribute -->
+
+    <script>
+      var fileUpload = document.getElementById("input");         <!-- refers to <input> tag -->
+
+      function myEventHandler()
+      {
+        var fileList = fileUpload.files;                       <!-- fileList is an array -->
+        var firstFile = fileList[0];                           <!-- arrays are zero-based -->
+        console.log("file name = " + firstFile.name);          <!-- log file name to console -->
+      }
+    </script>
+  </body>
+</html>

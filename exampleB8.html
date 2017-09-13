@@ -1,0 +1,127 @@
+<!doctype html>
+<!--  ** parts of a URL **                                             -->
+<!--  This example explains the seven parts of a URL.                  -->                                                                     -->
+<!--  It is just exampleB4.html with additional logs to the console.   -->
+
+<!--------------------------------------------------------------------------------->
+<!--  The syntax of a URL is:                                                    -->
+<!--                                                                             -->
+<!--      protocol://userInfo@host:port/path?query#fragment                      -->
+<!--                                                                             -->
+<!--  The protocol can be file, ftp, http, https, magnet, telnet etc.            -->
+<!--                                                                             -->
+<!--  The userInfo is optional login information for the server.                 -->
+<!--                                                                             -->
+<!--  The host part is the name of the server that provides the resource.        -->
+<!--                                                                             -->
+<!--  The port number is optional. It is not necessary if the service            -->
+<!--  is running on its default port (port 80 for HTTP servers).                 -->
+<!--                                                                             -->
+<!--  The path points to a particular resource on the specified server.          -->
+<!--  It oftn looks like a filesystem path such as /forum/index.php.             -->
+<!--                                                                             -->
+<!--  The query string provides additional arguments for the server.             -->
+<!--  It's commonly used only in http URLs, where it contains form               -->
+<!--  data for input to programs running on the server.                          -->
+<!--                                                                             -->
+<!--  The fragment references a particular part of the remote resource.          -->
+<!--  If the remote resource is HTML, the fragment identifier names an           -->
+<!--  anchor in the HTML document.                                               -->
+<!--                                                                             -->
+<!--  Example:                                                                   --> 
+<!--                                                                             -->
+<!--  http://www.oreilly.com:1234/catalog/search.html?q=JavaScript&m=10#results  -->
+<!--------------------------------------------------------------------------------->
+<!--  function refresh()
+      {
+        myvar;
+        if (window.location.href.indexOf('?') > -1)
+        {
+          var url = window.location.href;
+          var pos = url.indexOf('?');
+          var qry = url.substring(pos+1, url.length-1);
+          var names = qry.split('&');
+          fname = names[0].split('=')[1];
+          lname = names[1].split('=')[1];
+          clearTimeout(myvar);
+          window.history.back();
+          alert(fname + "  " + lname);  // the two (string) names in global variables
+        }
+      }
+-->
+
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="initJH.js"></script>
+  </head>
+  <body>
+    <h1>Firebase Storage</h1>
+
+    <script>
+      // Get a reference to the storage service
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+
+      storageRef.child('JH/zXMLData.xml').getDownloadURL().then
+      (
+        function(url)
+        {
+          // This is downloaded directly to the browser page.
+          var xhr = new XMLHttpRequest();
+          xhr.responseType = 'text';   // Legal values are 'text', 'document', 'arraybuffer', 'blob '
+
+          xhr.onload = function(event) // Triggered when the request completes successfully.
+          {
+            var text = xhr.response;   // This is the downoaded text.
+            proceed(text, url);        // Send to the proceed() function for processing.
+          };    
+
+          xhr.open('GET', url);        // Reset the XMLHttpRequest object and store
+                                       // its arguments for later use by the send(). 
+          xhr.send();                  // This method causes an HTTP request to be issued.
+        }
+      ).catch
+        (
+          function(error) 
+          {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) 
+            {
+              case 'storage/object_not_found':
+              console.log("ERROR: File doesn't exist");
+              break;
+
+              case 'storage/unauthorized':
+              console.log("EROR: User doesn't have permission to access the object");
+              break;
+
+              case 'storage/canceled':
+              console.log("ERROR: User canceled the upload");
+              break;
+
+              case 'storage/unknown':
+              onsole.log("ERROR: Unknown error occurred, inspect the server response");
+              break;
+            }
+          }
+        ); 
+
+        function proceed(text, url)
+        {
+          var parser = document.createElement('a');
+          parser.href = url;
+
+               console.log("URL = " + parser.href);
+          console.log("protocol = " + parser.protocol);
+              console.log("host = " + parser.host);
+              console.log("port = " + parser.port); 
+          console.log("pathname = " + parser.pathname); 
+             console.log("query = " + parser.search); 
+          console.log("fragment = " + parser.hash);     
+        }
+
+    </script>
+  </body>
+</html>
