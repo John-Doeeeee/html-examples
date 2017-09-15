@@ -1,0 +1,61 @@
+<!doctype html>
+<!--  ** storage reference **                                        -->
+<!--  https://firebase.google.com/docs/storage/web/create-reference  -->
+<html>
+  <head>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="initJH.js"></script>
+    <script>
+      // Firebase Storage uses a simple folder/file system to
+      // structure data. Each file is accessed through a reference.
+      // References give you control over files at that location
+      // in your storage bucket. With this storage reference you
+      // can easily download an existing file, or upload a new one.
+
+      // Get a reference to the storage service
+      var storage = firebase.storage();
+
+      // Create a storage reference from the storage service.
+      var storageRef = storage.ref();
+      
+      console.log("A reference to the storage root.");
+      console.log("storageRef: " + storageRef);
+      console.log("storageRef.parent: " + storageRef.parent);
+      console.log("storageRef.root: " + storageRef.root);
+      console.log("storageRef.fullPath: " + storageRef.fullPath);
+      console.log("storageRef.name: " + storageRef.name);
+      console.log("storageRef.bucket: " + storageRef.bucket);
+
+      // Create a reference to a location lower in the tree
+      // by using the child() method on an existing reference.
+      var dataRef = storageRef.child("JH/XMLData.xml");
+      
+      console.log("\nA reference to the file JH/XMLData.xml");
+      console.log("dataRef: " + dataRef);
+      console.log("dataRef.parent: " + dataRef.parent);
+      console.log("dataRef.root: " + dataRef.root);
+      console.log("dataRef.fullPath: " + dataRef.fullPath);
+      console.log("dataRef.name: " + dataRef.name);
+      console.log("dataRef.bucket: " + storageRef.bucket);
+
+      // Reference's bucket is the name of the storage bucket
+      // where files are stored. Notice that storageRef.bucket
+      // and dataRef.bucket have the same name.
+
+      // Use the 'parent' and 'root' properties to navigate up 
+      // the file hierarchy. parent navigates up one level, 
+      // while root navigates all the way to the top.
+      var jack = dataRef.parent;
+     
+      console.log("\nA reference to the folder JH");
+      console.log("jack: " + jack);
+      console.log("jack.parent: " + jack.parent);
+      console.log("jack.root: " + jack.root);
+      console.log("jack.fullPath: " + jack.fullPath);
+      console.log("jack.name: " + jack.name);
+      console.log("jack.bucket: " + storageRef.bucket);    </script>
+
+  </body>
+</html>

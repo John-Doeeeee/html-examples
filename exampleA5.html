@@ -1,0 +1,15 @@
+<!doctype html>
+<!--  ** make a link **                         -->
+<!--  Put a link to a URL on the browser page.  -->
+<html>
+  <head>
+  </head>
+  <body>
+    <a id="link">Click here</a>                    <!-- an anchor tag -->
+    <script>
+      var url = "https://www.google.com/";         <!-- the URL -->
+      var lnk = document.getElementById("link");   <!-- refer to the <a> tag -->
+      lnk.href = url;                              <!-- insert an href attribute  -->
+    </script>
+  </body>
+</html>

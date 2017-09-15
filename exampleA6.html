@@ -1,0 +1,44 @@
+<!doctype html>
+<!--  ** make a promise **                                          -->
+<!--                                                                -->
+<!--  The 'Promise' object is used for asynchronous computations.   -->
+<!--  A Promise represents a value which may be available now,      -->
+<!--  or in the future, or never. The syntax is:                    -->
+<!--                                                                -->
+<!--      new Promise( function(resolve, reject) { ... } );         -->  
+<!--                                                                -->
+<!--  The resolve and reject functions, when called, resolve or     -->
+<!--  reject the promise, respectively.                             --> 
+<!--                                                                -->
+<!--  https://developer.mozilla.org/en-US/docs/Web/JavaScript/      -->
+<!--   Reference/Global_Objects/Promise                             -->
+
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+      var myPromise = new Promise
+      (
+        function(resolve, reject)
+          {
+            // Use setTimeout() to simulate async code.
+            // Wait 3 seconds and then return the message.
+            setTimeout( function() { resolve("Sucess!"); }, 3000);
+          }
+      );
+
+      // .then(onFulfilled, onRejected)
+      // appends fulfillment and rejection handlers 
+      // to the promise, and returns a new promise. 
+      myPromise.then
+      (
+        function(message)
+        {
+          alert(message);
+        }
+      );
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+
+<!--  ** Upload a string from a local drive to Storage. **       -->
+<!--                                                             -->
+<!--  This uses exampleA6.html, exampleB1.html,                  -->
+<!--  and                                                        -->
+<!--      dataRef.putString(data).then                           -->
+<!--      (                                                      -->
+<!--        function(snapshot)                                   -->
+<!--        {                                                    -->
+<!--          console.log('Uploaded a string!');                 -->
+<!--        }                                                    -->
+<!--      );                                                     -->
+<!--                                                             -->
+<!--  https://firebase.google.com/docs/storage/web/upload-files  -->
+
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Firebase Storage</h1>    
+
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script> 
+    <script src="initJH.js"></script>
+    <script>
+
+      // To upload a string to Cloud Storage, you first create a reference
+      // to the full path of the string, including the string name.
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+      var dataRef = storageRef.child('JH/hello.js');   <!-- Storage reference -->
+
+      var data = "Hello, World!";
+ 
+      dataRef.putString(data).then
+      (
+        function(snapshot)
+        {
+          console.log('Uploaded a string!');           <!-- upload the string --> 
+        }
+      );
+      
+    </script>
+  </body>
+</html>

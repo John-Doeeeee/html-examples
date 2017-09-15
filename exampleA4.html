@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--  ** multiple selections **                           -->
+<!--  Allow multiple selections in the <input> element.   -->
+<!--  Hold down the ctrl key for individual selections.   -->
+<!--  Hold down the shift key for contiguous selections.  -->
+<html>
+  <head>
+  </head>
+  <body>
+    <input type=file id="input" multiple onchange="myEventHandler();">   <!-- multiple attribute -->
+
+    <script>
+      var fileUpload = document.getElementById("input");
+ 
+      function myEventHandler()
+      {
+        var allFiles = fileUpload.files; 
+      
+        for (var i = 0; i < allFiles.length; i++)                        <!-- log them all -->
+        {
+          console.log(allFiles[i].name);
+        }
+      }
+    </script>
+  </body>
+</html>

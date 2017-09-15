@@ -1,0 +1,50 @@
+<!doctype html>
+<!--  ** Upload a file from a local drive to Firebase Storage. **  -->
+<!--                                                               -->
+<!--  This uses exampleA6.html, exampleB1.html, exampleB2.html     -->
+<!--  and                                                          -->
+<!--      dataRef.put(file).then                                   -->
+<!--      (                                                        -->
+<!--        function(snapshot)                                     -->
+<!--        {                                                      -->
+<!--          console.log('Uploaded a blob or file!');             -->
+<!--        }                                                      -->
+<!--      );                                                       -->
+<!--                                                               -->
+<!--  The user should select the file XMLData.xml.                 -->
+<!--  https://firebase.google.com/docs/storage/web/upload-files    -->
+
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Firebase Storage</h1>    
+    <input type=file id="input" onchange="myEventHandler();">  
+
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script> 
+    <script src="initJH.js"></script>
+    <script>
+      // To upload a file to Cloud Storage, you first create a reference
+      // to the full path of the file, including the file name.
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+      var dataRef = storageRef.child('JH/XMLData.xml');   <!-- Storage reference -->
+
+      var fileUpload = document.getElementById("input");    
+
+      function myEventHandler()
+      {
+        var fileList = fileUpload.files;                       
+        var firstFile = fileList[0];  
+                         
+        dataRef.put(firstFile).then
+        (
+          function(snapshot)
+          {
+            console.log('Uploaded a blob or file!');      <!-- upload the selected file --> 
+          }
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<!--  ** use a FileReader **                                            -->
+<!--  Read and display the contents of a local file                     -->
+<!--  See 'JavaScript: The Definitive Guide' Section 22.6.5, page 698.  -->
+<html>
+
+  <head>
+  </head>
+  <body>
+    <h1>File Reader example</h1>    
+    <input type=file id="selectFilesButton" onchange="onFilesSelected();">  
+
+    <script>
+      function onFilesSelected()
+      {
+        var fileList  = document.getElementById("selectFilesButton").files;    
+        var firstFile = fileList[0]; 
+        readfile(firstFile);
+      }   
+
+      function readfile(f)
+      { 
+        var reader = new FileReader();      // Create a FileReader object
+        reader.readAsText(f);               // Read the file
+        reader.onload = function()          // Define an event handler
+        {
+          var text = reader.result;         // This is the file contents
+          console.log(f.name);              // Show the file name
+          console.log(text);                // Show the file contents
+        }   
+        reader.onerror = function(e)        // If anything goes wrong
+        {
+          console.log("error", e);           // Just log it      
+        };  
+      }
+    </script>
+  </body>
+</html>

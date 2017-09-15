@@ -1,0 +1,32 @@
+<!doctype html>
+<!--  ** delete a file **                     -->
+<!--  storageRef.delete() returns a Promise,  --> 
+<!--  as explained in exampleA6.html.         -->      
+<html>
+  <head>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="initJH.js"></script>
+    <script>
+      // Create a reference to the file to delete.
+      var storageRef = firebase.storage().ref('JH/xx.js');
+
+      // Delete the file
+      storageRef.delete().then
+      (
+        function() 
+        {
+          // File deleted successfully
+          console.log('JH/xx.js' + " was deleted successfully!");
+        }
+      ).catch
+      (
+        function(error)
+        { 
+          console.log("ERROR: " + error);
+        }
+      );
+    </script>
+  </body>
+</html>
